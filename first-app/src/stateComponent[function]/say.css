@@ -1,0 +1,12 @@
+button {
+  width: 100px;
+  height: 50px;
+  margin: 10px 10px 10px 10px;
+}
+
+div {
+  font-size: 3rem;
+  margin-top: 20px;
+  text-align: center;
+  user-select: none;
+}
