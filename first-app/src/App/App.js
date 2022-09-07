@@ -1,11 +1,11 @@
 import "./App.css";
 // import MyComponent from "../Component[default]/MyComponent.js";
 // import Counter from "../stateComponent[class]/Counter.js";
-import Say from "../stateComponent[function]/say.js";
+// import Say from "../stateComponent[function]/say.js";
+// import EventPractice from "../EventPractice[class]/EventPractice.js";
+import EventPracticeFunction from "../EventPractice[function]/EventPractice.js";
 
 function App() {
-  // const text = "리액트";
-
   return (
     <>
       {/* <div className="div-text">{text}</div>
@@ -13,7 +13,9 @@ function App() {
         리액트
       </MyComponent> */}
       {/* <Counter text="바뀌지 않는 값" /> */}
-      <Say />
+      {/* <Say /> */}
+      {/* <EventPractice /> */}
+      <EventPracticeFunction />
     </>
   );
 }
