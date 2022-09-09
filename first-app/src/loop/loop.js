@@ -1,10 +1,20 @@
 import { useState } from "react";
+import styled from "styled-components";
+
+const StyledList = styled.div`
+  list-style-type: none;
+  justify-content: center;
+  width: 500px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+`;
 
 const Loop = () => {
   // 요소들이 있는 배열[객체]을 useState로 관리
   const [array, setArray] = useState([{ id: 1, text: "강예훈" }]);
   // id[key 값]을 위한 useState
-  const [nextId, setNextId] = useState("2");
+  const [nextId, setNextId] = useState(2);
   // inputText의 변화를 감지하기 위한 useState
   const [Input, setInput] = useState({
     dataInput: "",
@@ -40,30 +50,47 @@ const Loop = () => {
   // next 변수를 setArray로 업데이트 시켜준다
   // 이후엔 input 초기화
   const dataAdd = (e) => {
-    const next = array.concat({ id: nextId, text: Input.dataInput });
-    setNextId(nextId + 1);
-    setArray(next);
-    setInput({ dataInput: "" });
+    // Input에 입력값이 없다면 alert를 띄우고 return 한다
+    if (Input.dataInput.length <= 0) {
+      alert("데이터를 입력해주세요");
+      return;
+    }
+
+    // 중복된 데이터를 방지하는 조건문 (findIndex를 사용하여 기존의 데이터와 Input의 데이터를 검증)
+    // 값을 찾지못하면 -1을 반환하는 특성을 이용했다
+    if (
+      array.findIndex((value) => {
+        return value.text === Input.dataInput;
+      }) === -1
+    ) {
+      let next = array.concat({ id: nextId, text: Input.dataInput });
+      setNextId(nextId + 1);
+      setArray(next);
+      setInput({ dataInput: "" });
+    } else {
+      alert("중복된 데이터는 입력하실 수 없습니다");
+    }
   };
 
+  // 엔터키를 누르면 dataAdd 함수 실행
   const enterKeyPress = (e) => {
     if (e.key === "Enter") {
       dataAdd();
     }
   };
-  const { dataInput } = Input;
 
   return (
     <>
-      <ul>{newArray}</ul>
       <input
         type="text"
         name="dataInput"
-        value={dataInput}
+        value={Input.dataInput}
         onChange={textChange}
         onKeyPress={enterKeyPress}
       ></input>
       <button onClick={dataAdd}>데이터 추가</button>
+
+      <StyledList>{newArray}</StyledList>
     </>
   );
 };
