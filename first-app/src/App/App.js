@@ -1,3 +1,4 @@
+import { useReducer } from "react";
 import "./App.css";
 // import MyComponent from "../Component[default]/MyComponent.js";
 // import Counter from "../stateComponent[class]/Counter.js";
@@ -9,8 +10,8 @@ import "./App.css";
 // import Loop from "../loop/loop.js";
 // import LifeCycle from "../LifeCycle[class]/LifeCycle.js";
 // import ErrorSearch from "../ErrorSearch/ErrorSearch.js";
-import HooksPractice from "../HooksPractice/HooksPractice.js";
-import { Component, useReducer, useState } from "react";
+// import HooksPractice from "../HooksPractice/HooksPractice.js";
+// import { Component, useReducer, useState } from "react";
 
 // 랜덤으로 색상을 정해주는 함수
 // const getRandomColor = () => {
@@ -34,30 +35,6 @@ function App() {
   //   setState(state - 1);
   // };
 
-  const reducerFunction = (state, action) => {
-    switch (action.type) {
-      case "up":
-        return state + 1;
-      case "reset":
-        return 0;
-      case "down":
-        return state - 1;
-    }
-  };
-
-  const up = () => {
-    disPatchCount({ type: "up" });
-  };
-
-  const reset = () => {
-    disPatchCount({ type: "reset" });
-  };
-  const down = () => {
-    disPatchCount({ type: "down" });
-  };
-
-  const [count, disPatchCount] = useReducer(reducerFunction, 0);
-
   const InputReducer = (state, action) => {
     return { ...state, [action.name]: action.value };
   };
@@ -66,7 +43,36 @@ function App() {
     disPatchData(e.target);
   };
 
-  const [inputData, disPatchData] = useReducer(InputReducer, { text: "dd" });
+  const [inputData, disPatchData] = useReducer(InputReducer, {
+    text: "",
+    number: "",
+  });
+
+  const reducerFunction = (state, action) => {
+    switch (action.type) {
+      case "up":
+        return state + Number(action.number);
+      case "reset":
+        return 0;
+      case "down":
+        return state - Number(action.number);
+      default:
+        return;
+    }
+  };
+
+  const [count, disPatchCount] = useReducer(reducerFunction, 0);
+
+  const up = () => {
+    disPatchCount({ type: "up", number: inputData.number });
+  };
+
+  const reset = () => {
+    disPatchCount({ type: "reset" });
+  };
+  const down = () => {
+    disPatchCount({ type: "down", number: inputData.number });
+  };
 
   return (
     <>
@@ -97,6 +103,11 @@ function App() {
       <button onClick={up}>+</button>
       <button onClick={reset}>0</button>
       <button onClick={down}>-</button>
+      <input
+        name="number"
+        placeholder="연산 값 지정"
+        onChange={InputChange}
+      ></input>
       <div>{count}</div>
       <input
         name="text"
