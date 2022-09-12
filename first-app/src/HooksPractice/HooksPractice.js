@@ -1,4 +1,4 @@
-import { useEffect, useInsertionEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 
 // useState -> 함수형 컴포넌트에서 상태관리를 위해 사용되는 함수 [클래스의 setState와 비슷하다]
 // useEffect -> 함수형 컴포넌트가 렌더링 될 때마다 특정 작업을 수행하게 해주는 함수
@@ -30,6 +30,47 @@ const HooksPractice = () => {
     console.log("number change : ", number);
   }, [number]);
 
+  // return () => 이후의 algorithm은 상태가 업데이트 되기 전이나 언마운트 되기 전에 실행 됨
+  // 언마운트 될때에만 실행시키고 싶다면 두번째 인자로 빈배열을 넘겨주면 된다
+
+  useEffect(() => {
+    return () => {
+      console.log("cleanup");
+      console.log(number);
+    };
+  });
+
+  const Reducer = (state, action) => {
+    switch (action.type) {
+      case "INCREMENT":
+        return { value: state.value + 1 };
+      case "DECREMENT":
+        return { value: state.value - 1 };
+      default:
+        return state;
+    }
+  };
+
+  const [state, dispatch] = useReducer(Reducer, { value: 0 });
+
+  const InputReducer = (state, action) => {
+    return {
+      ...state,
+      [action.name]: action.value,
+    };
+  };
+
+  const [inputState, inputDispatch] = useReducer(InputReducer, {
+    name: "",
+    message: "",
+  });
+
+  const { name, message } = inputState;
+
+  const reducerChange = (e) => {
+    inputDispatch(e.target);
+  };
+
   const clickEvents = (value) => {
     setNumber(number + value);
   };
@@ -42,24 +83,44 @@ const HooksPractice = () => {
     <>
       {" "}
       <button
+        // setState로 관리
+        // onClick={() => {
+        //   clickEvents(1);
+        // }}
         onClick={() => {
-          clickEvents(1);
+          dispatch({ type: "INCREMENT" });
         }}
       >
         +1
       </button>
-      <div>{number}</div>
+      <div>{state.value}</div>
       <button
+        // setState로 관리
+        // onClick={() => {
+        //   clickEvents(-1);
+        // }}
         onClick={() => {
-          clickEvents(-1);
+          dispatch({ type: "DECREMENT" });
         }}
       >
         -1
       </button>
-      <input name="name" placeholder="이름" onChange={inputChange}></input>
-      <input name="message" placeholder="텍스트" onChange={inputChange}></input>
-      <h1>이름 : {input.name}</h1>
-      <h1>내용 : {input.message}</h1>
+      <input
+        name="name"
+        placeholder="이름"
+        // useState로 관리
+        // onChange={inputChange}
+        onChange={reducerChange}
+      ></input>
+      <input
+        name="message"
+        placeholder="텍스트"
+        // useState로 관리
+        // onChange={inputChange}
+        onChange={reducerChange}
+      ></input>
+      <h1>이름 : {name}</h1>
+      <h1>내용 : {message}</h1>
     </>
   );
 };
