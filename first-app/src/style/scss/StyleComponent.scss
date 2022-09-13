@@ -1,0 +1,41 @@
+@import "./utils.scss";
+
+.ScssComponent {
+  display: flex;
+
+  .box {
+    cursor: pointer;
+    transition: all 0.3s ease-in;
+    &.red {
+      background-color: $red;
+      @include squaze(1);
+    }
+    &.orange {
+      background-color: $orange;
+      @include squaze(2);
+    }
+    &.yellow {
+      background-color: $yellow;
+      @include squaze(3);
+    }
+    &.green {
+      background-color: $green;
+      @include squaze(4);
+    }
+    &.blue {
+      background-color: $blue;
+      @include squaze(5);
+    }
+    &.indigo {
+      background-color: $indigo;
+      @include squaze(6);
+    }
+    &.violet {
+      background-color: $violet;
+      @include squaze(7);
+    }
+    &:hover {
+      background-color: black;
+    }
+  }
+}

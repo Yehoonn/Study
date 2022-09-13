@@ -5,6 +5,14 @@ import { useEffect, useReducer, useState } from "react";
 // componentDidMount, componentDidUpdate가 합친 형태이다
 // 어떻게 사용하는지에 따라 렌더링 이후에 작동할지, 이전에 작동할지 등 타이밍을 정할 수 있다
 
+// const clickEvents = (value) => {
+//   setNumber(number + value);
+// };
+
+// const inputChange = (e) => {
+//   setInput({ ...input, [e.target.name]: e.target.value });
+// };
+
 const HooksPractice = () => {
   const [number, setNumber] = useState(0);
   const [input, setInput] = useState({
@@ -40,6 +48,15 @@ const HooksPractice = () => {
     };
   });
 
+  // useReducer => state와 비슷하게 상태관리를 위해 사용되는 hooks
+  // 좀 더 세부적인 state 관리가 가능하며 사용자가 직접 state를 조종하는것이 아닌
+  // 일종의 '명령'을 통해 state를 바꿔달라는 '요청'을 하게 해준다
+  // Reducer를 사용하는데 필요한 것들
+  // 1. 실질적인 처리를 위한 함수 -> 매개변수엔 state와 action이 들어간다
+  // state <- 바꿀 대상의 현재 상태, action <- 바꾸기 위한 행동
+  // 2. 상태관리를 위한 요소 => const [state,dispatch]
+  // 3. useReducer(1에서 만든 함수,'state의 기본 상태')
+
   const Reducer = (state, action) => {
     switch (action.type) {
       case "INCREMENT":
@@ -49,6 +66,14 @@ const HooksPractice = () => {
       default:
         return state;
     }
+  };
+
+  const up = () => {
+    dispatch({ type: "INCREMENT" });
+  };
+
+  const down = () => {
+    dispatch({ type: "DECREMENT" });
   };
 
   const [state, dispatch] = useReducer(Reducer, { value: 0 });
@@ -71,14 +96,6 @@ const HooksPractice = () => {
     inputDispatch(e.target);
   };
 
-  const clickEvents = (value) => {
-    setNumber(number + value);
-  };
-
-  const inputChange = (e) => {
-    setInput({ ...input, [e.target.name]: e.target.value });
-  };
-
   return (
     <>
       {" "}
@@ -87,9 +104,7 @@ const HooksPractice = () => {
         // onClick={() => {
         //   clickEvents(1);
         // }}
-        onClick={() => {
-          dispatch({ type: "INCREMENT" });
-        }}
+        onClick={up}
       >
         +1
       </button>
@@ -99,9 +114,7 @@ const HooksPractice = () => {
         // onClick={() => {
         //   clickEvents(-1);
         // }}
-        onClick={() => {
-          dispatch({ type: "DECREMENT" });
-        }}
+        onClick={down}
       >
         -1
       </button>

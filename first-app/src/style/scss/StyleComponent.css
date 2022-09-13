@@ -1,0 +1,45 @@
+.ScssComponent {
+  display: flex;
+}
+.ScssComponent .box {
+  cursor: pointer;
+  transition: all 0.3s ease-in;
+}
+.ScssComponent .box.red {
+  background-color: #fa5252;
+  width: 32px;
+  height: 32px;
+}
+.ScssComponent .box.orange {
+  background-color: #fd7e14;
+  width: 64px;
+  height: 64px;
+}
+.ScssComponent .box.yellow {
+  background-color: #fcc301;
+  width: 96px;
+  height: 96px;
+}
+.ScssComponent .box.green {
+  background-color: #40c057;
+  width: 128px;
+  height: 128px;
+}
+.ScssComponent .box.blue {
+  background-color: #339af0;
+  width: 160px;
+  height: 160px;
+}
+.ScssComponent .box.indigo {
+  background-color: #5c7cfa;
+  width: 192px;
+  height: 192px;
+}
+.ScssComponent .box.violet {
+  background-color: #7950f2;
+  width: 224px;
+  height: 224px;
+}
+.ScssComponent .box:hover {
+  background-color: black;
+}/*# sourceMappingURL=StyleComponent.css.map */
