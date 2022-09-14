@@ -9,6 +9,11 @@ function App() {
   const [newid, setId] = useState(1);
 
   const addList = (text) => {
+    if (text.length <= 0) {
+      alert('데이터를 입력해주세요');
+      return;
+    }
+
     if (data.findIndex((value) => value.text === text) === -1) {
       let newList = data.concat({
         id: newid,
@@ -17,6 +22,7 @@ function App() {
 
       setData(newList);
       setId(newid + 1);
+      return;
     } else {
       alert(`'${text}'는 이미 있는 데이터입니다`);
     }

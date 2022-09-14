@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import styled from 'styled-components';
 
 const InsertForm = styled('div')`
@@ -21,7 +21,7 @@ const StyledInput = styled('input')`
 
 const StyledButton = styled('button')`
   width: 15%;
-  height: 103%;
+  height: 104%;
   background-color: rgba(0, 0, 0, 0.4);
   border: 0px solid white;
   display: flex;
@@ -43,13 +43,16 @@ const StyledButton = styled('button')`
 const TodoInsert = ({ addList }) => {
   const [input, setInput] = useState({ text: '' });
 
-  const inputChange = (e) => {
-    setInput({ ...input, [e.target.name]: e.target.value });
-  };
+  const inputChange = useCallback(
+    (e) => {
+      setInput({ ...input, [e.target.name]: e.target.value });
+    },
+    [input],
+  );
 
   const buttonClick = () => {
     addList(input.text);
-    setInput('');
+    setInput({ ...input, text: '' });
   };
 
   const enterKey = (e) => {
