@@ -11,7 +11,16 @@
   border: 3px solid white;
 }
 
+/* 글로벌 CSS */
+
 :global .something {
   font-weight: 800;
   color: aqua;
 }
+
+/* CSS Module이 아닌 파일에서는
+
+:local .wrapper {
+  background-color: black;
+} 
+:local을 사용해 CSS Module을 사용할 수 있다 */

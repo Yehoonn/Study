@@ -18,7 +18,8 @@ import { Component } from "react";
 // import UseRef from "../HooksPractice/useRef";
 // import CustomHooks from "../HooksPractice/CustomHooks";
 // import StyleComponent from "../style/scss/StyleComponent";
-import CSSModule from "../style/scss/CSSModule/CSSModule";
+// import CSSModule from "../style/scss/CSSModule/CSSModule";
+import StyledComponents from "../style/StyledComponents/StyledComponents";
 
 //  랜덤으로 색상을 정해주는 함수
 //  const getRandomColor = () => {
@@ -167,7 +168,8 @@ class App extends Component {
         {/* <UseRef /> */}
         {/* <CustomHooks /> */}
         {/* <StyleComponent /> */}
-        <CSSModule />
+        {/* <CSSModule /> */}
+        <StyledComponents></StyledComponents>
       </>
     );
   }

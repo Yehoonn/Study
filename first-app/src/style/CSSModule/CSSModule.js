@@ -1,5 +1,8 @@
 import styles from "./CSSModule.module.css";
 
+// CSSModule을 사용한 스타일 작성
+// 클래스명뒤에 임의의 값을 부여하여 중복을 방지해준다
+
 const CSSModule = () => {
   return (
     <>

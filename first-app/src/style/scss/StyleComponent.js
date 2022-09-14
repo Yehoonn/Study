@@ -1,5 +1,7 @@
 import "./StyleComponent.css";
 
+// SCSS를 활용한 스타일 설정
+
 const StyleComponent = () => {
   return (
     <>
